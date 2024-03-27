@@ -49,5 +49,5 @@ sleep 30
 stress-ng --cpu "$(nproc)" --io 4 --hdd 1 --vm-bytes $(awk '/MemFree/{printf "%dn", $2 * 0.9;}' < /proc/meminfo)k --vm-keep -m 1 --timeout 60 &
 wait
 ### Clean up stress test
-killall clusteranalysis.sh
+killall nodeanalysis.sh
 
