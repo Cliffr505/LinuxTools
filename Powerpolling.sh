@@ -7,15 +7,15 @@ DURATION=$((10 * INTERVAL))
                                                                                 
 ### Function to extract power data from the PDU. Adjust the SNMP String and IP Address if needed
 get_a_power() {                                                                 
-   snmpwalk -v 2c -c HPCOps 172.30.61.32 SNMPv2-SMI::enterprises.21239.5.2.3.1.1.9.1 | awk -F'=' '{print $2}' | awk -F: '{print $2}'
+   snmpwalk -v 2c -c 'string' ***.***.***.*** SNMPv2-SMI::enterprises.21239.5.2.3.1.1.9.1 | awk -F'=' '{print $2}' | awk -F: '{print $2}'
 }                                                                               
                                                                                 
 get_b_power() {                                                                 
-   snmpwalk -v 2c -c HPCOps 172.30.61.33 SNMPv2-SMI::enterprises.21239.5.2.3.1.1.9.1 | awk -F'=' '{print $2}' | awk -F: '{print $2}'
+   snmpwalk -v 2c -c 'string' ***.***.***.*** SNMPv2-SMI::enterprises.21239.5.2.3.1.1.9.1 | awk -F'=' '{print $2}' | awk -F: '{print $2}'
 }                                                                               
                                                                                 
 ### Initialize CSV file with headers. Change Headers to appropriate rack                                        
-echo "Index, Time, BD13-A, BD13-B, BD13 Total" > "$OUTPUT_FILE"                 
+echo "Index, Time, 'PDU'-A, 'PDU'-B, 'RACK' Total" > "$OUTPUT_FILE"                 
                                                                                 
 ### Record power usage every 30 seconds. Change 'i<' to match the 'DURATION'                                     
 for ((i=0; i<10; i++))                                                          
