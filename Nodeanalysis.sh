@@ -22,7 +22,8 @@ get_load() {
         uptime | sed -n "s/^.*load average/load average/p" | sed -e "s/load average://g" | awk -F, '{print $1}'
 }
 get_power() {
-        omreport chassis pwrmonitoring | grep -A 4 "Power Consumption" | grep Reading | awk '{print $3}'
+        ### turbostat --Summary --quiet --show PkgWatt --interval 30 ###
+        ipmitool sdr | grep "Watts"
 }
 get_frequency() {
     ### Get frequency of each CPU core
